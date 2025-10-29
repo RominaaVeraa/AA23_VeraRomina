@@ -1,19 +1,21 @@
-/* css/halloween.css - Mejorado con tema Halloween */
+/* css/halloween.css */
 :root {
-  --bg: #0a0a0a;
-  --bg-gradient: #1a0f2e;
-  --card: #1c1428;
-  --card-hover: #261d35;
-  --accent: #ff6b35;
-  --accent-hover: #ff8555;
-  --purple: #8b5cf6;
-  --purple-dark: #6d28d9;
-  --text: #f4f4f6;
-  --text-dim: #a8a8b4;
-  --border: rgba(255, 255, 255, 0.1);
-  --shadow: rgba(0, 0, 0, 0.5);
-  --success: #10b981;
-  --danger: #ef4444;
+  --bg: #0d0208;
+  --bg-gradient: #1a0b2e;
+  --card: #1f0b2e;
+  --card-hover: #2d1343;
+  --accent: #7fff00;
+  --accent-hover: #9fff3a;
+  --purple: #c026d3;
+  --purple-dark: #a21caf;
+  --orange: #ff6d00;
+  --text: #e8f5e9;
+  --text-dim: #b0bec5;
+  --border: rgba(127, 255, 0, 0.2);
+  --shadow: rgba(0, 0, 0, 0.7);
+  --success: #7fff00;
+  --danger: #ff1744;
+  --glow: rgba(127, 255, 0, 0.3);
 }
 
 * { 
@@ -34,7 +36,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Efecto de telaraña decorativa */
+/* Efecto de niebla y telaraña */
 body::before {
   content: '';
   position: fixed;
@@ -43,10 +45,17 @@ body::before {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 15% 20%, rgba(127, 255, 0, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(192, 38, 211, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 109, 0, 0.05) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
+  animation: fogMove 20s ease-in-out infinite;
+}
+
+@keyframes fogMove {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
 }
 
 /* Header */
@@ -55,10 +64,10 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background: rgba(28, 20, 40, 0.95);
+  background: rgba(31, 11, 46, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 2px solid var(--border);
-  box-shadow: 0 4px 20px var(--shadow);
+  box-shadow: 0 4px 20px var(--shadow), 0 0 30px rgba(127, 255, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -75,12 +84,13 @@ body::before {
 .brand {
   font-weight: 900;
   font-size: 1.5rem;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   background: linear-gradient(135deg, var(--accent), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+  text-shadow: 0 0 30px rgba(127, 255, 0, 0.5);
+  filter: drop-shadow(0 0 10px rgba(127, 255, 0, 0.4));
 }
 
 .nav {
@@ -96,12 +106,15 @@ body::before {
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
+  border: 1px solid transparent;
 }
 
 .nav a:hover {
   background: var(--card-hover);
   color: var(--accent);
   transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--glow);
 }
 
 .small {
@@ -111,8 +124,8 @@ body::before {
 
 /* Botones */
 .btn {
-  background: linear-gradient(135deg, var(--accent), #ff8555);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent), #6dd400);
+  color: #000;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 12px;
@@ -120,15 +133,15 @@ body::before {
   font-weight: 700;
   font-size: 0.95rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 15px rgba(127, 255, 0, 0.3), 0 0 20px rgba(127, 255, 0, 0.1);
   text-decoration: none;
   display: inline-block;
 }
 
 .btn:hover {
-  background: linear-gradient(135deg, var(--accent-hover), #ffa575);
+  background: linear-gradient(135deg, var(--accent-hover), #8fff4a);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+  box-shadow: 0 6px 20px rgba(127, 255, 0, 0.5), 0 0 30px rgba(127, 255, 0, 0.3);
 }
 
 .btn:active {
@@ -137,12 +150,13 @@ body::before {
 
 .btn.secondary {
   background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(192, 38, 211, 0.3), 0 0 20px rgba(192, 38, 211, 0.1);
 }
 
 .btn.secondary:hover {
-  background: linear-gradient(135deg, #a78bfa, var(--purple));
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+  background: linear-gradient(135deg, #d946ef, var(--purple));
+  box-shadow: 0 6px 20px rgba(192, 38, 211, 0.5), 0 0 30px rgba(192, 38, 211, 0.3);
 }
 
 .btn:disabled {
@@ -163,13 +177,17 @@ body::before {
 h1, h2 {
   margin-bottom: 1.5rem;
   color: var(--text);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(127, 255, 0, 0.2);
 }
 
 h1 {
   font-size: 2.5rem;
   text-align: center;
   margin-top: 1rem;
+  background: linear-gradient(135deg, var(--accent), var(--purple), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 h2 {
@@ -186,12 +204,12 @@ h2 {
 
 /* Tarjetas de disfraces */
 .card {
-  background: rgba(28, 20, 40, 0.9);
+  background: rgba(31, 11, 46, 0.9);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 0;
-  box-shadow: 0 10px 40px var(--shadow);
+  box-shadow: 0 10px 40px var(--shadow), 0 0 20px rgba(127, 255, 0, 0.05);
   transition: all 0.3s ease;
   overflow: hidden;
   position: relative;
@@ -206,14 +224,25 @@ h2 {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--accent), var(--purple));
+  background: linear-gradient(90deg, var(--accent), var(--purple), var(--orange));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
+.card::after {
+  content: '🎃';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(255, 109, 0, 0.8));
+}
+
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 40px var(--glow);
   border-color: var(--accent);
 }
 
@@ -221,12 +250,17 @@ h2 {
   opacity: 1;
 }
 
+.card:hover::after {
+  opacity: 1;
+  transform: rotate(20deg) scale(1.2);
+}
+
 /* Contenedor de imagen con aspect ratio fijo */
 .card-image-wrapper {
   width: 100%;
   height: 220px;
   overflow: hidden;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, #1a0b2e, #0d0208);
   position: relative;
   cursor: pointer;
 }
@@ -236,12 +270,13 @@ h2 {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
   display: block;
 }
 
 .card:hover img {
   transform: scale(1.1);
+  filter: brightness(1.1) contrast(1.1);
 }
 
 /* Modal para ver detalles */
@@ -253,7 +288,7 @@ h2 {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
   animation: fadeIn 0.3s ease;
 }
@@ -265,7 +300,7 @@ h2 {
 }
 
 .modal-content {
-  background: linear-gradient(135deg, var(--card), #2a2042);
+  background: linear-gradient(135deg, rgba(31, 11, 46, 0.98), rgba(26, 11, 46, 0.98));
   border-radius: 24px;
   max-width: 950px;
   width: 95%;
@@ -273,7 +308,7 @@ h2 {
   overflow-y: auto;
   position: relative;
   border: 2px solid var(--accent);
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.9), 0 0 60px var(--glow);
   animation: slideUp 0.4s ease;
   margin: auto;
 }
@@ -282,7 +317,7 @@ h2 {
   position: absolute;
   top: 20px;
   right: 20px;
-  background: rgba(239, 68, 68, 0.9);
+  background: rgba(255, 23, 68, 0.9);
   color: white;
   border: none;
   width: 40px;
@@ -296,11 +331,13 @@ h2 {
   transition: all 0.3s ease;
   z-index: 10;
   font-weight: bold;
+  box-shadow: 0 0 20px rgba(255, 23, 68, 0.5);
 }
 
 .modal-close:hover {
   background: var(--danger);
   transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 23, 68, 0.8);
 }
 
 .modal-body {
@@ -315,10 +352,12 @@ h2 {
   height: 500px;
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, #1a0b2e, #0d0208);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid var(--border);
+  box-shadow: 0 0 30px rgba(127, 255, 0, 0.1);
 }
 
 .modal-image img {
@@ -335,9 +374,13 @@ h2 {
 
 .modal-info h2 {
   font-size: 2.5rem;
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 20px rgba(255, 107, 53, 0.5);
+  text-shadow: none;
+  filter: drop-shadow(0 2px 20px rgba(127, 255, 0, 0.3));
 }
 
 .modal-info .description {
@@ -349,11 +392,12 @@ h2 {
 }
 
 .modal-stats {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   padding: 1.5rem;
   border-radius: 16px;
   margin-bottom: 2rem;
   border: 1px solid var(--border);
+  box-shadow: inset 0 0 20px rgba(127, 255, 0, 0.05);
 }
 
 .modal-stats .stat-row {
@@ -376,6 +420,7 @@ h2 {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--accent);
+  text-shadow: 0 0 10px var(--glow);
 }
 
 .modal-actions {
@@ -414,6 +459,7 @@ h2 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
   color: var(--accent);
+  text-shadow: 0 0 10px var(--glow);
 }
 
 .card p {
@@ -434,24 +480,25 @@ h2 {
 }
 
 .badge {
-  background: rgba(139, 92, 246, 0.2);
+  background: rgba(192, 38, 211, 0.2);
   color: var(--purple);
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.9rem;
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  border: 1px solid rgba(192, 38, 211, 0.4);
+  box-shadow: 0 0 10px rgba(192, 38, 211, 0.2);
 }
 
 /* Formularios */
 .form {
   max-width: 600px;
-  background: rgba(28, 20, 40, 0.95);
+  background: rgba(31, 11, 46, 0.95);
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 20px;
   border: 1px solid var(--border);
-  box-shadow: 0 10px 40px var(--shadow);
+  box-shadow: 0 10px 40px var(--shadow), 0 0 30px rgba(127, 255, 0, 0.05);
   margin: 2rem auto;
 }
 
@@ -484,7 +531,7 @@ input[type="file"] {
   padding: 0.75rem 1rem;
   border-radius: 12px;
   border: 1px solid var(--border);
-  background: rgba(10, 10, 10, 0.5);
+  background: rgba(13, 2, 8, 0.6);
   color: var(--text);
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -494,13 +541,14 @@ input[type="file"] {
 input[type="file"] {
   padding: 0.6rem;
   cursor: pointer;
-  background: rgba(10, 10, 10, 0.7);
+  background: rgba(13, 2, 8, 0.7);
   border: 2px dashed var(--border);
 }
 
 input[type="file"]:hover {
   border-color: var(--accent);
-  background: rgba(255, 107, 53, 0.05);
+  background: rgba(127, 255, 0, 0.05);
+  box-shadow: 0 0 15px var(--glow);
 }
 
 input[type="file"]::file-selector-button {
@@ -516,8 +564,9 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]::file-selector-button:hover {
-  background: linear-gradient(135deg, #a78bfa, var(--purple));
+  background: linear-gradient(135deg, #d946ef, var(--purple));
   transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(192, 38, 211, 0.4);
 }
 
 /* Checkbox mejorado */
@@ -542,7 +591,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  box-shadow: 0 0 0 3px rgba(127, 255, 0, 0.1), 0 0 20px var(--glow);
 }
 
 textarea {
@@ -555,11 +604,11 @@ textarea {
 .table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(28, 20, 40, 0.6);
+  background: rgba(31, 11, 46, 0.7);
   border-radius: 12px;
   overflow: hidden;
   margin-top: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(127, 255, 0, 0.05);
 }
 
 .table th,
@@ -570,12 +619,13 @@ textarea {
 }
 
 .table th {
-  background: rgba(139, 92, 246, 0.2);
+  background: rgba(192, 38, 211, 0.2);
   font-weight: 700;
   color: var(--text);
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(192, 38, 211, 0.3);
 }
 
 .table tbody tr {
@@ -583,8 +633,9 @@ textarea {
 }
 
 .table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(127, 255, 0, 0.05);
   transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(127, 255, 0, 0.1);
 }
 
 .table tbody tr:last-child td {
@@ -605,13 +656,14 @@ textarea {
 
 /* Alertas */
 .alert {
-  background: rgba(239, 68, 68, 0.15);
+  background: rgba(255, 23, 68, 0.15);
   border: 1px solid var(--danger);
-  color: #fecaca;
+  color: #ffcdd2;
   padding: 1rem 1.25rem;
   border-radius: 12px;
   margin-bottom: 1.5rem;
   font-weight: 500;
+  box-shadow: 0 0 20px rgba(255, 23, 68, 0.2);
 }
 
 /* Mensaje de no hay disfraces */
@@ -620,24 +672,26 @@ textarea {
   font-size: 1.1rem;
   color: var(--text-dim);
   padding: 3rem;
-  background: rgba(28, 20, 40, 0.5);
+  background: rgba(31, 11, 46, 0.6);
   border-radius: 20px;
   border: 2px dashed var(--border);
 }
 
 /* Estilos para tips y ayudas */
 .tip {
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: rgba(192, 38, 211, 0.1);
+  border: 1px solid rgba(192, 38, 211, 0.3);
   border-radius: 12px;
   padding: 0.75rem 1rem;
   font-size: 0.9rem;
   color: var(--text-dim);
   margin-top: 1rem;
+  box-shadow: 0 0 15px rgba(192, 38, 211, 0.1);
 }
 
 .tip strong {
   color: var(--accent);
+  text-shadow: 0 0 10px var(--glow);
 }
 
 /* Enlaces mejorados */
@@ -653,6 +707,7 @@ a:not(.btn) {
 a:not(.btn):hover {
   color: var(--accent-hover);
   text-decoration: underline;
+  text-shadow: 0 0 10px var(--glow);
 }
 
 /* Scroll personalizado */
@@ -662,16 +717,18 @@ a:not(.btn):hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(10, 10, 10, 0.5);
+  background: rgba(13, 2, 8, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, var(--accent), var(--purple));
   border-radius: 5px;
+  box-shadow: 0 0 10px var(--glow);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, var(--accent-hover), #a78bfa);
+  background: linear-gradient(135deg, var(--accent-hover), #d946ef);
+  box-shadow: 0 0 20px var(--glow);
 }
 
 /* Animación de carga suave */
